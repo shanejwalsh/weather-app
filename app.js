@@ -7,14 +7,16 @@ if (!location) {
 	console.log('Please provide a location');
 } else {
 	geocode(location, (error, data) => {
+		const { latitude, longitude, location } = data;
+
 		if (error) {
 			return console.log(error);
 		}
-		getWeatherFromCoords(data.latitude, data.longitude, (error, forecastData) => {
+		getWeatherFromCoords(latitude, longitude, (error, forecastData) => {
 			if (error) {
 				return console.log(error);
 			}
-			console.log(data.location);
+			console.log(location);
 			console.log(forecastData);
 		});
 	});

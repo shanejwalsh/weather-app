@@ -3,13 +3,15 @@ const api = require('./API');
 
 const getWeatherFromCoords = (latitude, longitude, callback) => {
 	const darkSkyUrl = api.darkSky + `${latitude}, ${longitude}`;
-	request({ url: darkSkyUrl + api.c, json: true }, (error, response) => {
+	request({ url: darkSkyUrl + api.c, json: true }, (error, { body }) => {
+		const { data } = body.daily;
+		const { temperature, precipProbability: rain } = body.currently;
 		if (error) {
 			callback('unable to connect to weather');
-		} else if (response.body.error) {
+		} else if (body.error) {
 			callback('unable to find location');
 		} else {
-			callback(undefined, response.body.daily.data[0].summary + ' It is currently ' + response.body.currently.temperature + ' degrees out. The current chance of percipitation is ' + response.body.currently.precipProbability + '%');
+			callback(undefined, data[0].summary + ' It is currently ' + temperature + ' degrees out. The current chance of percipitation is ' + rain + '%');
 		}
 	});
 };
