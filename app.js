@@ -1,4 +1,4 @@
-const geocode = require('./geocode');
-const getWeatherFromCoords = require('./getWeather');
+const geocode = require('./utils/geocode');
+const getWeatherFromCoords = require('./utils/getWeather');
 
 geocode('Dublin', getWeatherFromCoords);

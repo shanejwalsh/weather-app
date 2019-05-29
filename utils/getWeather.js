@@ -1,5 +1,5 @@
 const request = require('request');
-const api = require('.utils/API');
+const api = require('./API');
 
 const getWeatherFromCoords = (error, coordsObj) => {
 	const darkSkyUrl = api.darkSky + `${coordsObj.latitude}, ${coordsObj.longitude}`;
